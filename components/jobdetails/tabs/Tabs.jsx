@@ -1,16 +1,16 @@
 import React from 'react'
-import { View, Text, FlatList, TouchableOpacity } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity,useColorScheme } from 'react-native'
 
 import styles from './tabs.style'
 import { SIZES } from '../../../constants'
 const Tabs = (
   {tabs,activeTab,setactiveTab}
 ) => {
-
+  const theme = useColorScheme() === 'dark';
   const TabButton=({name,activeTab,onHandleSearchType})=>{
     return (
-      <TouchableOpacity onPress={onHandleSearchType} style={styles.btn(name,activeTab)}>
-        <Text style={styles.btnText(name,activeTab)}>{name}</Text>
+      <TouchableOpacity onPress={onHandleSearchType} style={styles.btn(name,activeTab,theme)}>
+        <Text style={styles.btnText(name,activeTab,theme)}>{name}</Text>
       </TouchableOpacity>
     )
   }

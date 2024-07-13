@@ -1,21 +1,36 @@
 // screens/JobDetails.js
 import React, { useCallback, useState, useEffect } from 'react';
 import {
-  View, Text, SafeAreaView, ScrollView, ActivityIndicator, RefreshControl
+  View, Text, SafeAreaView, ScrollView, ActivityIndicator, RefreshControl,useColorScheme
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { COLORS, SIZES } from '../constants';
+import { COLORS, SIZES,darkTheme } from '../constants';
 import useFetch from '../hooks/useFetch';
 import { Company, JobTabs, JobAbout,Specifics,JobFooter } from '../components';
 
 const JobDetails = ({ route }) => {
   const navigation = useNavigation();
-
+  const theme = useColorScheme() === 'dark';
   const [refreshing, setrefreshing] = useState(false);
 
   const { id } = route.params;
   const { data, isLoading, error, refetch } = useFetch('job-details', { job_id: id });
-  // const [data, setdata] = useState("");
+  // const dummyData = [
+  //   {
+  //     job_id: id,
+  //     employer_logo: 'https://via.placeholder.com/150',
+  //     job_title: 'Software Engineer',
+  //     employer_name: 'Tech Company',
+  //     job_country: 'USA',
+  //     job_description: 'This is a job description for a Software Engineer.',
+  //     job_highlights: {
+  //       Qualifications: ['Bachelor\'s degree in Computer Science', '2+ years of experience in software development'],
+  //       Responsibilities: ['Develop and maintain software applications', 'Collaborate with cross-functional teams']
+  //     },
+  //     job_google_link: 'https://careers.google.com/jobs/results/'
+  //   }
+  // ];
+  // const [data, setdata] = useState(dummyData);
   // const [isLoading, setisLoading] = useState(false);
   // const [error, seterror] = useState(false);
   const tabs = ["About", "Qualifications", "Responsibilities"];
@@ -57,7 +72,7 @@ const JobDetails = ({ route }) => {
   
 
   return(
-  <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
+  <SafeAreaView style={{ flex: 1, backgroundColor:theme? darkTheme.InputBackgroundColor: COLORS.lightWhite }}>
     <ScrollView
       showsVerticalScrollIndicator={false}
         refreshControl={<RefreshControl refreshing={refreshing}
@@ -65,11 +80,11 @@ const JobDetails = ({ route }) => {
     >
     
       {isLoading ? (
-        <ActivityIndicator size='large' color={COLORS.primary} />
+        <ActivityIndicator size='large' color={theme?darkTheme.PrimaryTextColor:COLORS.primary} style={{paddingVertical:10}} />
       ) : error ? (
-        <Text>Something went wrong</Text>
+        <Text style={theme? COLORS.white:darkTheme.ErrorTextColor}>Something went wrong</Text>
       ) : data.length === 0 ? (
-        <Text>No data available</Text>
+        <Text style={theme? COLORS.white:darkTheme.ErrorTextColor}>No data available</Text>
       ) : (
         <View style={{ padding: SIZES.medium, paddingBottom: 100 }}>
           <Company

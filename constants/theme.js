@@ -1,3 +1,4 @@
+
 const COLORS = {
   primary: "#312651",
   secondary: "#444262",
@@ -7,7 +8,24 @@ const COLORS = {
   gray2: "#C1C0C8",
 
   white: "#F3F4F8",
-  lightWhite: "#FAFAFC",
+  lightWhite: "#EEEE",
+  black:'#121212',
+  ligthBlack:'#1F1B22'
+
+};
+const darkTheme={
+  BackgroundColor: "#1E1E1E", //(very dark gray)
+PrimaryTextColor: "#FFFFFF" ,//(white)
+SecondaryTextColor: "#B0B0B0", //(light gray)
+LinkColor: "#00A6ED" ,//(bright blue)
+ButtonBackgroundColor:" #333333", //(dark gray)
+ButtonTextColor: "#FFFFFF", //(white)
+DividerColor:"#403C3C", //(medium dark gray)
+InputBackgroundColor: "#2C2C2C", //(dark gray)
+InputTextColor: "#FFFFFF", //(white)
+ErrorTextColor: "#FF4D4D", //(red),
+Border:"#696969"
+
 };
 
 const FONT = {
@@ -48,4 +66,4 @@ const SHADOWS = {
   },
 };
 
-export { COLORS, FONT, SIZES, SHADOWS };
+export { COLORS, FONT, SIZES, SHADOWS,darkTheme };

@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 import { FONT, SIZES, COLORS } from "../../../constants";
+import { darkTheme } from "../../../constants/theme";
 
 const styles = StyleSheet.create({
   container: {
@@ -11,16 +12,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  headerTitle: {
+  headerTitle:(theme)=>( {
     fontSize: SIZES.large,
     fontFamily: FONT.medium,
-    color: COLORS.primary,
-  },
-  headerBtn: {
+    color: darkTheme?COLORS.white:COLORS.primary,
+  }),
+  headerBtn:(theme)=>( {
     fontSize: SIZES.medium,
     fontFamily: FONT.medium,
-    color: COLORS.gray,
-  },
+    color: theme?darkTheme.SecondaryTextColor:COLORS.gray,
+  }),
   cardsContainer: {
     marginTop: SIZES.medium,
   },

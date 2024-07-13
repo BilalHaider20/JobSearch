@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS, FONT, SIZES } from "../../../constants";
+import { COLORS, FONT, SIZES,darkTheme } from "../../../constants";
 
 const styles = StyleSheet.create({
   container: {
@@ -12,11 +12,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: SIZES.small,
   },
-  headerTitle: {
+  headerTitle:(theme)=>( {
     fontSize: SIZES.large,
     fontFamily: FONT.medium,
-    color: COLORS.primary,
-  },
+    color:theme?darkTheme.PrimaryTextColor: COLORS.primary,
+  }),
   headerBtn: {
     fontSize: SIZES.medium,
     fontFamily: FONT.medium,

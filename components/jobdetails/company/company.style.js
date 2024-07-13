@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS, FONT, SIZES } from "../../../constants";
+import { COLORS, FONT, SIZES,darkTheme } from "../../../constants";
 
 const styles = StyleSheet.create({
   container: {
@@ -8,14 +8,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  logoBox: {
+  logoBox:(theme)=>( {
     width: 80,
     height: 80,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FFF",
     borderRadius: SIZES.large,
-  },
+  }),
   logoImage: {
     width: "80%",
     height: "80%",
@@ -23,24 +23,24 @@ const styles = StyleSheet.create({
   jobTitleBox: {
     marginTop: SIZES.small,
   },
-  jobTitle: {
+  jobTitle:(theme)=>( {
     fontSize: SIZES.large,
-    color: COLORS.primary,
+    color: theme? darkTheme.PrimaryTextColor:COLORS.primary,
     fontFamily: FONT.bold,
     textAlign: "center",
     fontWeight:'700'
-  },
+  }),
   companyInfoBox: {
     marginTop: SIZES.small / 2,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },
-  companyName: {
+  companyName: (theme)=>({
     fontSize: SIZES.medium - 2,
-    color: COLORS.primary,
+    color: theme?darkTheme.SecondaryTextColor: COLORS.primary,
     fontFamily: FONT.medium,
-  },
+  }),
   locationBox: {
     flexDirection: "row",
     justifyContent: "center",
@@ -51,12 +51,12 @@ const styles = StyleSheet.create({
     height: 14,
     tintColor: COLORS.gray,
   },
-  locationName: {
+  locationName:(theme)=>( {
     fontSize: SIZES.medium - 2,
-    color: COLORS.gray,
+    color: theme?darkTheme.SecondaryTextColor:COLORS.gray,
     fontFamily: FONT.regular,
     marginLeft: 2,
-  },
+  }),
 });
 
 export default styles;

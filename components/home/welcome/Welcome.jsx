@@ -1,25 +1,26 @@
 import React,{useState} from 'react'
-import { View, Text, TextInput, TouchableOpacity, Image, FlatList } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Image, FlatList,useColorScheme } from 'react-native'
 import styles from './welcome.style'
 
-import { icons,SIZES } from '../../../constants'
+import { COLORS, icons,SIZES } from '../../../constants'
 import { useNavigation } from '@react-navigation/native'
 const JobTypes =["Full Time","Part Time","Contractor"];
 const Welcome = () => {
 const navigation = useNavigation();
   const [activejobType, setactivejobType] = useState('Full Time');
   const [SearchTerm, setSearchTerm] = useState('');
+  const theme=useColorScheme();
   return (
     <View>
       <View style={styles.container}>
-      <Text style={styles.userName}>Hello</Text>
-      <Text style={styles.welcomeMessage}>Find your perfect job</Text>
+      <Text style={styles.userName(theme)}>Hello</Text>
+      <Text style={styles.welcomeMessage(theme)}>Find your perfect job</Text>
       
           {/* Search Container */}
       <View style={styles.searchContainer}>
         <View style={styles.searchWrapper}>
-          <TextInput style={styles.searchInput} 
-          placeholder='what are you looking for?' placeholderTextColor={'grey'}
+          <TextInput style={styles.searchInput(theme)} 
+          placeholder='what are you looking for?' placeholderTextColor={theme==='dark'?COLORS.lightWhite:COLORS.black}
           onChangeText={(text)=>setSearchTerm(text)}
           value={SearchTerm}/>
         </View>
@@ -36,12 +37,12 @@ const navigation = useNavigation();
         <FlatList 
         data={JobTypes}
         renderItem={({item})=>(
-          <TouchableOpacity style={styles.tab(activejobType,item)}
+          <TouchableOpacity style={styles.tab(activejobType,item,theme)}
           onPress={()=>{
             setactivejobType(item)
             navigation.navigate('JobSearch',{id:item})
             }}>
-            <Text style={styles.tabText(activejobType,item)}>{item}</Text>
+            <Text style={styles.tabText(activejobType,item,theme)}>{item}</Text>
           </TouchableOpacity>
         )}
         keyExtractor={item=> item}

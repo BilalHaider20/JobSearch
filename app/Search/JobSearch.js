@@ -1,15 +1,46 @@
 // screens/JobSearch.js
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Image, TouchableOpacity, View, Text, SafeAreaView } from 'react-native';
+import { ActivityIndicator, FlatList, Image, TouchableOpacity, View, Text, SafeAreaView,useColorScheme } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { NearbyJobCard } from '../../components';
-import { COLORS, icons, SIZES } from '../../constants';
+import { COLORS, icons, SIZES,darkTheme } from '../../constants';
 import styles from '../../styles/search';
 
 const JobSearch = ({ route }) => {
+    const theme = useColorScheme() === 'dark';
     const { id } = route.params; 
     const navigation = useNavigation();
+    // const dummyData = [
+    //     {
+    //       job_id: 1,
+    //       employer_name: "Bilal Haider",
+    //       employer_logo: "https://example.com/logo1.png",
+    //       company_name: "Upwork",
+    //       job_title: "MERN Developer",
+    //       job_country: "Pakistan",
+    //       job_employment_type:"Full Time"
+    //     },
+    //     {
+    //       job_id: 2,
+    //       employer_name: "John Doe",
+    //       employer_logo: "https://example.com/logo2.png",
+    //       company_name: "Freelancer",
+    //       job_title: "React Native Developer",
+    //       job_country: "USA",
+    //       job_employment_type:"Full Time"
+    //     },
+    //     {
+    //       job_id: 3,
+    //       employer_name: "Jane Smith",
+    //       employer_logo: "https://example.com/logo3.png",
+    //       company_name: "Fiverr",
+    //       job_title: "Backend Developer",
+    //       job_country: "UK",
+    //       job_employment_type:"Full Time"
+    //     },
+    //   ];
+
     const [searchResult, setSearchResult] = useState([]);
     const [searchLoader, setSearchLoader] = useState(false);
     const [searchError, setSearchError] = useState(null);
@@ -33,7 +64,7 @@ const JobSearch = ({ route }) => {
                 },
             };
 
-            const response = await axios.request(options);
+             const response = await axios.request(options);
             setSearchResult(response.data.data);
         } catch (error) {
             setSearchError(error);
@@ -58,7 +89,7 @@ const JobSearch = ({ route }) => {
     }, []);
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: theme?darkTheme.InputBackgroundColor:COLORS.lightWhite }}>
             <FlatList
                 data={searchResult}
                 renderItem={({ item }) => (
@@ -72,8 +103,8 @@ const JobSearch = ({ route }) => {
                 ListHeaderComponent={() => (
                     <>
                         <View style={styles.container}>
-                            <Text style={styles.searchTitle}>{id}</Text>
-                            <Text style={styles.noOfSearchedJobs}>Job Opportunities</Text>
+                            <Text style={styles.searchTitle(theme)}>{id}</Text>
+                            <Text style={styles.noOfSearchedJobs(theme)}>Job Opportunities</Text>
                         </View>
                         <View style={styles.loaderContainer}>
                             {searchLoader ? (
@@ -97,7 +128,7 @@ const JobSearch = ({ route }) => {
                             />
                         </TouchableOpacity>
                         <View style={styles.paginationTextBox}>
-                            <Text style={styles.paginationText}>{page}</Text>
+                            <Text style={styles.paginationText(theme)}>{page}</Text>
                         </View>
                         <TouchableOpacity
                             style={styles.paginationButton}

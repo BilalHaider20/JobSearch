@@ -1,19 +1,19 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS, FONT, SIZES } from "../../../constants";
+import { COLORS, FONT, SIZES,darkTheme } from "../../../constants";
 
 const styles = StyleSheet.create({
-  container: {
+  container:(theme)=>( {
     position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
     padding: SIZES.small,
-    backgroundColor: "#FFF",
+    backgroundColor: theme?darkTheme.BackgroundColor:"#FFF",
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-  },
+  }),
   likeBtn: {
     width: 55,
     height: 55,
@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  likeBtnImage: {
+  likeBtnImage:(theme)=>( {
     width: "40%",
     height: "40%",
     tintColor: "#F37453",
-  },
+  }),
   applyBtn: {
     flex: 1,
     backgroundColor: "#FE7654",

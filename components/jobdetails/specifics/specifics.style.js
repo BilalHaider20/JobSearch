@@ -1,19 +1,19 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS, FONT, SIZES } from "../../../constants";
+import { COLORS, FONT, SIZES,darkTheme } from "../../../constants";
 
 const styles = StyleSheet.create({
-  container: {
+  container:(theme)=>( {
     marginTop: SIZES.large,
-    backgroundColor: "#FFF",
+    backgroundColor:theme?darkTheme.Border: "#FFF",
     borderRadius: SIZES.medium,
     padding: SIZES.medium,
-  },
-  title: {
+  }),
+  title:(theme)=>( {
     fontSize: SIZES.large,
-    color: COLORS.primary,
+    color: theme?darkTheme.PrimaryTextColor :COLORS.primary,
     fontFamily: FONT.bold,
-  },
+  }),
   pointsContainer: {
     marginVertical: SIZES.small,
   },
@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.gray2,
     marginTop: 6,
   },
-  pointText: {
+  pointText:(theme)=>( {
     fontSize: SIZES.medium - 2,
-    color: COLORS.gray,
+    color: theme?COLORS.gray2:COLORS.black,
     fontFamily: FONT.regular,
     marginLeft: SIZES.small,
-  },
+  }),
 });
 
 export default styles;
